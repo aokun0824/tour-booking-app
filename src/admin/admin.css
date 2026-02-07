@@ -243,6 +243,17 @@
 }
 .email-badge.demo { background: #fff3cd; color: #856404; }
 .email-badge.live { background: #d4edda; color: #155724; }
+.email-recipients {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #666;
+}
+.email-recipient {
+  padding: 0.15rem 0;
+}
 .email-demo-note {
   font-size: 0.8rem;
   color: #888;

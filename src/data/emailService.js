@@ -3,19 +3,23 @@ import emailjs from '@emailjs/browser';
 // EmailJS configuration
 // To enable real email sending:
 // 1. Create account at https://www.emailjs.com/
-// 2. Create an email service and template
+// 2. Create an email service and templates (customer, driver, admin)
 // 3. Set these values in your .env file:
 //    VITE_EMAILJS_SERVICE_ID=your_service_id
 //    VITE_EMAILJS_TEMPLATE_CUSTOMER=your_customer_template_id
 //    VITE_EMAILJS_TEMPLATE_DRIVER=your_driver_template_id
+//    VITE_EMAILJS_TEMPLATE_ADMIN=your_admin_template_id
 //    VITE_EMAILJS_PUBLIC_KEY=your_public_key
+//    VITE_ADMIN_EMAIL=admin@yourdomain.com
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || '';
 const TEMPLATE_CUSTOMER = import.meta.env.VITE_EMAILJS_TEMPLATE_CUSTOMER || '';
 const TEMPLATE_DRIVER = import.meta.env.VITE_EMAILJS_TEMPLATE_DRIVER || '';
+const TEMPLATE_ADMIN = import.meta.env.VITE_EMAILJS_TEMPLATE_ADMIN || '';
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
+const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || 'admin@demo.tourbooking.jp';
 
-const isConfigured = SERVICE_ID && TEMPLATE_CUSTOMER && TEMPLATE_DRIVER && PUBLIC_KEY;
+const isConfigured = SERVICE_ID && PUBLIC_KEY;
 
 function logEmail(type, params) {
   const log = JSON.parse(localStorage.getItem('tbk_email_log') || '[]');
@@ -30,6 +34,19 @@ function logEmail(type, params) {
 
 export function getEmailLog() {
   return JSON.parse(localStorage.getItem('tbk_email_log') || '[]');
+}
+
+async function trySend(templateId, params) {
+  if (isConfigured && templateId) {
+    try {
+      await emailjs.send(SERVICE_ID, templateId, params, PUBLIC_KEY);
+      return { success: true, mode: 'live' };
+    } catch (err) {
+      console.error('EmailJS send failed:', err);
+      return { success: false, mode: 'live', error: err.text };
+    }
+  }
+  return { success: true, mode: 'demo' };
 }
 
 export async function sendCustomerConfirmation(booking, driver) {
@@ -50,18 +67,7 @@ export async function sendCustomerConfirmation(booking, driver) {
   };
 
   logEmail('customer_confirmation', params);
-
-  if (isConfigured) {
-    try {
-      await emailjs.send(SERVICE_ID, TEMPLATE_CUSTOMER, params, PUBLIC_KEY);
-      return { success: true, mode: 'live' };
-    } catch (err) {
-      console.error('EmailJS customer send failed:', err);
-      return { success: false, mode: 'live', error: err.text };
-    }
-  }
-
-  return { success: true, mode: 'demo' };
+  return trySend(TEMPLATE_CUSTOMER, params);
 }
 
 export async function sendDriverNotification(booking, driver) {
@@ -80,29 +86,43 @@ export async function sendDriverNotification(booking, driver) {
   };
 
   logEmail('driver_notification', params);
+  return trySend(TEMPLATE_DRIVER, params);
+}
 
-  if (isConfigured) {
-    try {
-      await emailjs.send(SERVICE_ID, TEMPLATE_DRIVER, params, PUBLIC_KEY);
-      return { success: true, mode: 'live' };
-    } catch (err) {
-      console.error('EmailJS driver send failed:', err);
-      return { success: false, mode: 'live', error: err.text };
-    }
-  }
+export async function sendAdminNotification(booking, driver) {
+  const params = {
+    to_name: 'Admin',
+    to_email: ADMIN_EMAIL,
+    booking_id: booking.bookingId,
+    tour_date: booking.date,
+    guest_name: `${booking.guestInfo.firstName} ${booking.guestInfo.lastName}`,
+    guest_email: booking.guestInfo.email,
+    guest_phone: booking.guestInfo.phone,
+    driver_name: driver.name,
+    driver_id: driver.id,
+    vehicle: driver.vehicle.name,
+    pickup_location: booking.guestInfo.hotel,
+    guests: booking.guestInfo.guests,
+    price: `¥${booking.price.toLocaleString()}`,
+    special_requests: booking.guestInfo.notes || 'None',
+    created_at: booking.createdAt,
+  };
 
-  return { success: true, mode: 'demo' };
+  logEmail('admin_notification', params);
+  return trySend(TEMPLATE_ADMIN, params);
 }
 
 export async function sendBookingEmails(booking, driver) {
-  const [customerResult, driverResult] = await Promise.all([
+  const [customerResult, driverResult, adminResult] = await Promise.all([
     sendCustomerConfirmation(booking, driver),
     sendDriverNotification(booking, driver),
+    sendAdminNotification(booking, driver),
   ]);
 
   return {
     customer: customerResult,
     driver: driverResult,
+    admin: adminResult,
     mode: isConfigured ? 'live' : 'demo',
   };
 }

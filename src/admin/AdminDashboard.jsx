@@ -160,7 +160,7 @@ export default function AdminDashboard({ onLogout }) {
                   <div key={i} className="adm-email-card">
                     <div className="adm-email-header">
                       <span className={`adm-email-type ${e.type}`}>
-                        {e.type === 'customer_confirmation' ? '📧 Customer' : '📧 Driver'}
+                        {e.type === 'customer_confirmation' ? '📧 Customer' : e.type === 'driver_notification' ? '📧 Driver' : '📧 Admin'}
                       </span>
                       <span className={`adm-email-mode ${e.mode}`}>{e.mode}</span>
                       <span className="adm-email-time">{new Date(e.timestamp).toLocaleString()}</span>

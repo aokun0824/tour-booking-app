@@ -31,11 +31,22 @@ export default function Confirmation() {
                     : '📧 確認メールを送信しました！')
               }
             </div>
+            <div className="email-recipients">
+              <span className="email-recipient">
+                {lang === 'en' ? '→ Guest' : '→ 観光客'}: {state.guestInfo.email}
+              </span>
+              <span className="email-recipient">
+                {lang === 'en' ? '→ Driver' : '→ ドライバー'}: {lang === 'ja' ? driver.nameJa : driver.name}
+              </span>
+              <span className="email-recipient">
+                {lang === 'en' ? '→ Admin' : '→ 管理者'}: admin@demo.tourbooking.jp
+              </span>
+            </div>
             {emailResult.mode === 'demo' && (
               <p className="email-demo-note">
                 {lang === 'en'
-                  ? 'In production, emails will be sent to the guest and driver automatically.'
-                  : '本番環境では、ゲストとドライバーに自動的にメールが送信されます。'}
+                  ? 'In production, emails will be sent to all three parties automatically.'
+                  : '本番環境では、観光客・ドライバー・管理者の3者に自動的にメールが送信されます。'}
               </p>
             )}
           </div>
