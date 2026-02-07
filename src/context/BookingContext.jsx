@@ -8,6 +8,7 @@ const initialState = {
   selectedDriver: null,
   guestInfo: null,
   bookingId: null,
+  emailResult: null,
 };
 
 function reducer(state, action) {
@@ -31,7 +32,12 @@ function reducer(state, action) {
     case 'BACK_TO_BOOKING':
       return { ...state, step: 'booking' };
     case 'CONFIRM_BOOKING':
-      return { ...state, step: 'confirmation', bookingId: action.payload };
+      return {
+        ...state,
+        step: 'confirmation',
+        bookingId: action.payload.bookingId || action.payload,
+        emailResult: action.payload.emailResult || null,
+      };
     default:
       return state;
   }

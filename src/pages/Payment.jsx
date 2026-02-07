@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useLang } from '../context/LanguageContext';
 import { useBooking } from '../context/BookingContext';
+import { saveBooking, formatDateStr, getDriverById } from '../data/storage';
+import { sendBookingEmails } from '../data/emailService';
 
 export default function Payment() {
   const { lang, t } = useLang();
@@ -21,13 +23,35 @@ export default function Payment() {
     return digits;
   };
 
-  const handlePay = (e) => {
+  const handlePay = async (e) => {
     e.preventDefault();
     setProcessing(true);
-    setTimeout(() => {
-      const bookingId = 'TBK-' + Date.now().toString(36).toUpperCase();
-      dispatch({ type: 'CONFIRM_BOOKING', payload: bookingId });
-    }, 2000);
+
+    // Simulate payment processing
+    await new Promise(r => setTimeout(r, 2000));
+
+    const bookingId = 'TBK-' + Date.now().toString(36).toUpperCase();
+    const booking = {
+      bookingId,
+      driverId: driver.id,
+      driverName: driver.name,
+      vehicleName: driver.vehicle.name,
+      date: formatDateStr(state.selectedDate),
+      guestInfo: state.guestInfo,
+      price: driver.pricePerDay,
+      createdAt: new Date().toISOString(),
+    };
+
+    saveBooking(booking);
+
+    // Send email notifications (non-blocking)
+    const latestDriver = getDriverById(driver.id) || driver;
+    const emailResult = await sendBookingEmails(booking, latestDriver);
+
+    dispatch({
+      type: 'CONFIRM_BOOKING',
+      payload: { bookingId, emailResult },
+    });
   };
 
   const isValid = card.number.replace(/\s/g, '').length === 16 &&

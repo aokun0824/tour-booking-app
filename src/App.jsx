@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { LanguageProvider } from './context/LanguageContext';
 import { BookingProvider, useBooking } from './context/BookingContext';
 import Navbar from './components/Navbar';
@@ -8,9 +9,13 @@ import DriverDetail from './pages/DriverDetail';
 import BookingForm from './pages/BookingForm';
 import Payment from './pages/Payment';
 import Confirmation from './pages/Confirmation';
+import DriverApp from './driver/DriverApp';
+import AdminApp from './admin/AdminApp';
 import './App.css';
+import './driver/driver.css';
+import './admin/admin.css';
 
-function AppContent() {
+function CustomerApp() {
   const { state } = useBooking();
 
   const renderPage = () => {
@@ -36,12 +41,32 @@ function AppContent() {
   );
 }
 
-export default function App() {
+function Router() {
+  const [route, setRoute] = useState(window.location.hash);
+
+  useEffect(() => {
+    const onHash = () => setRoute(window.location.hash);
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  if (route === '#/driver') {
+    return <DriverApp />;
+  }
+
+  if (route === '#/admin') {
+    return <AdminApp />;
+  }
+
   return (
     <LanguageProvider>
       <BookingProvider>
-        <AppContent />
+        <CustomerApp />
       </BookingProvider>
     </LanguageProvider>
   );
+}
+
+export default function App() {
+  return <Router />;
 }

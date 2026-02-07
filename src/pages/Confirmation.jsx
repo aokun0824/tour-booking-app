@@ -5,6 +5,7 @@ export default function Confirmation() {
   const { lang, t } = useLang();
   const { state, dispatch } = useBooking();
   const driver = state.selectedDriver;
+  const emailResult = state.emailResult;
 
   return (
     <div className="confirmation-page">
@@ -17,6 +18,28 @@ export default function Confirmation() {
           <span>{t.confirmation.bookingId}</span>
           <strong>{state.bookingId}</strong>
         </div>
+
+        {emailResult && (
+          <div className="email-status">
+            <div className={`email-badge ${emailResult.mode === 'demo' ? 'demo' : 'live'}`}>
+              {emailResult.mode === 'demo'
+                ? (lang === 'en'
+                    ? '📧 Email notifications logged (Demo Mode)'
+                    : '📧 メール通知を記録しました（デモモード）')
+                : (lang === 'en'
+                    ? '📧 Confirmation emails sent!'
+                    : '📧 確認メールを送信しました！')
+              }
+            </div>
+            {emailResult.mode === 'demo' && (
+              <p className="email-demo-note">
+                {lang === 'en'
+                  ? 'In production, emails will be sent to the guest and driver automatically.'
+                  : '本番環境では、ゲストとドライバーに自動的にメールが送信されます。'}
+              </p>
+            )}
+          </div>
+        )}
 
         <div className="confirm-details">
           <h3>{t.confirmation.details}</h3>

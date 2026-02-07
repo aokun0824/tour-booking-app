@@ -1,6 +1,6 @@
 import { useLang } from '../context/LanguageContext';
 import { useBooking } from '../context/BookingContext';
-import { getDriversForDate } from '../data/drivers';
+import { getDriversForDate } from '../data/storage';
 
 export default function DriverList() {
   const { lang, t } = useLang();

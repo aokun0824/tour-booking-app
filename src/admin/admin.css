@@ -1,0 +1,265 @@
+/* ===== Admin Portal ===== */
+.adm-app {
+  --adm-primary: #6c5ce7;
+  --adm-primary-dark: #5a4bd1;
+  --adm-danger: #e74c3c;
+  --adm-bg: #f4f5f7;
+  --adm-surface: #ffffff;
+  min-height: 100vh;
+  background: var(--adm-bg);
+}
+
+/* Navbar */
+.adm-navbar {
+  background: var(--adm-primary);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.adm-navbar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  min-height: 56px;
+  gap: 1rem;
+}
+.adm-navbar-logo { font-weight: 700; font-size: 1rem; white-space: nowrap; }
+.adm-tabs { display: flex; gap: 0.25rem; }
+.adm-tab {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.65);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.adm-tab:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.adm-tab.active { background: rgba(255,255,255,0.2); color: #fff; }
+.adm-logout { color: rgba(255,255,255,0.7) !important; font-size: 0.85rem !important; }
+.adm-logout:hover { color: #fff !important; }
+
+.adm-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* Login */
+.adm-login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+  padding: 1.5rem;
+}
+.adm-login-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  text-align: center;
+}
+.adm-login-icon { font-size: 3rem; margin-bottom: 0.5rem; }
+.adm-login-card h2 { margin-bottom: 0.25rem; color: #333; }
+.adm-login-sub { color: #888; margin-bottom: 1.5rem; font-size: 0.95rem; }
+.adm-login-card .form-group { text-align: left; }
+.adm-login-error {
+  background: #fef0ef;
+  color: #e74c3c;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+.adm-login-hint { margin-top: 1.25rem; font-size: 0.8rem; color: #aaa; }
+
+/* Driver List */
+.adm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.adm-header h2 { margin: 0; }
+.adm-driver-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.adm-driver-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--adm-surface);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.adm-driver-photo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+.adm-driver-info { flex: 1; min-width: 0; }
+.adm-driver-info h3 { font-size: 1rem; margin: 0 0 0.2rem; }
+.adm-driver-ja { font-weight: 400; color: #888; font-size: 0.85rem; }
+.adm-driver-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: #888;
+}
+.adm-driver-langs { font-size: 0.8rem; color: #aaa; margin-top: 0.15rem; }
+.adm-driver-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+.btn-danger {
+  background: var(--adm-danger);
+  color: #fff;
+  border: none;
+}
+.btn-danger:hover { background: #c0392b; }
+.btn-danger-outline {
+  background: transparent;
+  border: 2px solid var(--adm-danger);
+  color: var(--adm-danger);
+}
+.btn-danger-outline:hover { background: var(--adm-danger); color: #fff; }
+.adm-confirm-delete {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--adm-danger);
+}
+
+/* Driver Form */
+.adm-driver-form {
+  max-width: 750px;
+}
+.adm-driver-form h3 { margin-bottom: 1.5rem; font-size: 1.3rem; }
+.adm-form-section {
+  background: var(--adm-surface);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  margin-bottom: 1rem;
+}
+.adm-form-section h4 {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: var(--adm-primary);
+}
+.adm-form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Bookings */
+.adm-bookings h2 { margin-bottom: 1rem; }
+.adm-empty { color: #aaa; text-align: center; padding: 2rem; }
+.adm-booking-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.adm-booking-card {
+  background: var(--adm-surface);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.adm-booking-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+.adm-booking-date { color: #888; font-size: 0.85rem; }
+.adm-booking-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem 1.5rem;
+  font-size: 0.85rem;
+}
+.adm-booking-body span { color: #888; }
+
+/* Emails */
+.adm-emails h2 { margin-bottom: 0.5rem; }
+.adm-email-note {
+  color: #888;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+.adm-email-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.adm-email-card {
+  background: var(--adm-surface);
+  border-radius: 10px;
+  padding: 0.85rem 1.15rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.adm-email-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+.adm-email-type {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.adm-email-mode {
+  padding: 0.1rem 0.5rem;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.adm-email-mode.demo { background: #fff3cd; color: #856404; }
+.adm-email-mode.live { background: #d4edda; color: #155724; }
+.adm-email-time { color: #aaa; font-size: 0.75rem; margin-left: auto; }
+.adm-email-body { font-size: 0.8rem; color: #666; }
+
+/* Email status on confirmation */
+.email-status { margin: 1rem 0; }
+.email-badge {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.email-badge.demo { background: #fff3cd; color: #856404; }
+.email-badge.live { background: #d4edda; color: #155724; }
+.email-demo-note {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 0.35rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .adm-navbar-inner { flex-wrap: wrap; padding: 0.5rem 1rem; gap: 0.5rem; }
+  .adm-tabs { order: 3; width: 100%; justify-content: space-around; }
+  .adm-tab { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
+  .adm-driver-card { flex-direction: column; align-items: flex-start; }
+  .adm-driver-actions { width: 100%; justify-content: flex-end; }
+  .adm-booking-body { grid-template-columns: 1fr; }
+  .adm-main { padding: 1rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .adm-login-card { padding: 1.5rem; }
+}
