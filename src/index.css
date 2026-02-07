@@ -1,0 +1,23 @@
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root {
+  --primary: #c0392b;
+  --primary-dark: #a93226;
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --text: #1a1a2e;
+  --text-secondary: #555;
+  --border: #e0e0e0;
+  --radius: 12px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --max-w: 1100px;
+}
+html{scroll-behavior:smooth}
+body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+#root { min-height: 100vh; }
+img { max-width: 100%; display: block; }

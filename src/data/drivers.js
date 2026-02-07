@@ -1,0 +1,123 @@
+const drivers = [
+  {
+    id: 1,
+    name: 'Takeshi Yamamoto',
+    nameJa: '山本 武',
+    photo: 'https://api.dicebear.com/9.x/personas/svg?seed=Takeshi',
+    experience: 12,
+    rating: 4.9,
+    reviewCount: 234,
+    languages: ['English', 'Japanese'],
+    languagesJa: ['英語', '日本語'],
+    bio: 'Born and raised in Kyoto, I have deep knowledge of temples, gardens, and hidden local spots. I love sharing the history behind every corner of this beautiful city.',
+    bioJa: '京都生まれ京都育ち。お寺、庭園、地元の隠れた名所に精通しています。この美しい街のあらゆる場所の歴史を共有することが大好きです。',
+    specialties: ['Temples & Shrines', 'Traditional Culture', 'Photography Spots'],
+    specialtiesJa: ['寺社仏閣', '伝統文化', '撮影スポット'],
+    vehicle: { name: 'Toyota Alphard', seats: 6, type: 'Luxury Van' },
+    pricePerDay: 35000,
+    availableDays: [1, 2, 3, 4, 5, 6],
+    reviews: [
+      { author: 'Sarah M.', rating: 5, text: 'Takeshi made our Kyoto trip unforgettable! His knowledge of hidden temples was incredible.' },
+      { author: 'John D.', rating: 5, text: 'Best tour guide we\'ve ever had. Very professional and friendly.' },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Yuki Tanaka',
+    nameJa: '田中 ゆき',
+    photo: 'https://api.dicebear.com/9.x/personas/svg?seed=Yuki',
+    experience: 8,
+    rating: 4.8,
+    reviewCount: 189,
+    languages: ['English', 'Japanese', 'Mandarin'],
+    languagesJa: ['英語', '日本語', '中国語'],
+    bio: 'I specialize in food tours and know every great restaurant from street stalls to Michelin stars. Let me take you on a culinary journey through Japan!',
+    bioJa: 'フードツアーを専門とし、屋台からミシュラン星付きレストランまで熟知しています。日本の食の旅にお連れします！',
+    specialties: ['Food Tours', 'Local Cuisine', 'Night Markets'],
+    specialtiesJa: ['フードツアー', '地元のグルメ', 'ナイトマーケット'],
+    vehicle: { name: 'Toyota Crown', seats: 4, type: 'Sedan' },
+    pricePerDay: 30000,
+    availableDays: [1, 2, 3, 5, 6],
+    reviews: [
+      { author: 'Emma L.', rating: 5, text: 'The food tour was amazing! Yuki knew all the best hidden restaurants.' },
+      { author: 'Michael B.', rating: 5, text: 'Incredible experience. The ramen place she took us to was the best I\'ve ever had.' },
+    ],
+  },
+  {
+    id: 3,
+    name: 'Kenji Suzuki',
+    nameJa: '鈴木 健二',
+    photo: 'https://api.dicebear.com/9.x/personas/svg?seed=Kenji',
+    experience: 15,
+    rating: 4.9,
+    reviewCount: 312,
+    languages: ['English', 'Japanese', 'Korean'],
+    languagesJa: ['英語', '日本語', '韓国語'],
+    bio: 'With 15 years of experience, I offer premium tours covering Tokyo, Hakone, and Mt. Fuji areas. I provide luxury experiences with attention to every detail.',
+    bioJa: '15年の経験を活かし、東京、箱根、富士山エリアのプレミアムツアーを提供しています。細部にまでこだわったラグジュアリーな体験をお届けします。',
+    specialties: ['Mt. Fuji', 'Luxury Tours', 'Nature & Hot Springs'],
+    specialtiesJa: ['富士山', 'ラグジュアリーツアー', '自然・温泉'],
+    vehicle: { name: 'Lexus LM', seats: 4, type: 'Luxury Sedan' },
+    pricePerDay: 45000,
+    availableDays: [1, 2, 4, 5, 6, 0],
+    reviews: [
+      { author: 'David K.', rating: 5, text: 'The Mt. Fuji tour was breathtaking. Kenji knows the perfect viewpoints.' },
+      { author: 'Lisa W.', rating: 5, text: 'Worth every penny. The hot spring he recommended was heavenly.' },
+    ],
+  },
+  {
+    id: 4,
+    name: 'Mika Hayashi',
+    nameJa: '林 美香',
+    photo: 'https://api.dicebear.com/9.x/personas/svg?seed=Mika',
+    experience: 6,
+    rating: 4.7,
+    reviewCount: 98,
+    languages: ['English', 'Japanese', 'Spanish'],
+    languagesJa: ['英語', '日本語', 'スペイン語'],
+    bio: 'I love showing visitors the modern side of Japan — anime culture, Akihabara, Harajuku fashion, and gaming spots. Perfect for pop culture enthusiasts!',
+    bioJa: 'アニメ文化、秋葉原、原宿ファッション、ゲームスポットなど、日本のモダンな一面をお見せするのが大好きです。ポップカルチャー好きにぴったり！',
+    specialties: ['Anime & Manga', 'Pop Culture', 'Shopping'],
+    specialtiesJa: ['アニメ・マンガ', 'ポップカルチャー', 'ショッピング'],
+    vehicle: { name: 'Honda Step WGN', seats: 7, type: 'Minivan' },
+    pricePerDay: 28000,
+    availableDays: [0, 1, 3, 4, 5, 6],
+    reviews: [
+      { author: 'Carlos R.', rating: 5, text: 'Mika was so fun and knowledgeable about anime culture. Best day in Tokyo!' },
+      { author: 'Amy T.', rating: 4, text: 'Great tour of Akihabara and Harajuku. Highly recommend for pop culture fans.' },
+    ],
+  },
+  {
+    id: 5,
+    name: 'Hiroshi Nakamura',
+    nameJa: '中村 博',
+    photo: 'https://api.dicebear.com/9.x/personas/svg?seed=Hiroshi',
+    experience: 20,
+    rating: 5.0,
+    reviewCount: 456,
+    languages: ['English', 'Japanese', 'French'],
+    languagesJa: ['英語', '日本語', 'フランス語'],
+    bio: 'A certified national guide with 20 years of experience. I offer comprehensive tours of Nara, Osaka, and Kyoto with deep cultural insights.',
+    bioJa: '20年の経験を持つ全国通訳案内士。奈良、大阪、京都の包括的なツアーを深い文化的洞察とともに提供しています。',
+    specialties: ['Historical Sites', 'Cultural Heritage', 'Architecture'],
+    specialtiesJa: ['歴史的名所', '文化遺産', '建築'],
+    vehicle: { name: 'Toyota Granace', seats: 8, type: 'Large Van' },
+    pricePerDay: 40000,
+    availableDays: [1, 2, 3, 4, 5],
+    reviews: [
+      { author: 'Pierre L.', rating: 5, text: 'Hiroshi is a walking encyclopedia of Japanese history. Absolutely wonderful.' },
+      { author: 'Rachel S.', rating: 5, text: 'The best guide in Japan, period. His Nara deer park tour was magical.' },
+    ],
+  },
+];
+
+export function getDriversForDate(date) {
+  const dayOfWeek = date.getDay();
+  return drivers.filter(d => d.availableDays.includes(dayOfWeek));
+}
+
+export function getDriverById(id) {
+  return drivers.find(d => d.id === id);
+}
+
+export default drivers;
